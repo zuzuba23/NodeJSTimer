@@ -10,7 +10,7 @@ app.get('/', function(req,res){
 	res.sendFile(__dirname + '/views/timer.html');
 });
 
-var server_port = 3000;//process.env.PORT || 8080;
+var server_port = process.env.PORT || 8080;
 var server = app.listen(server_port, function(){
 	console.log("Listening on " 
            + ", server_port " + server_port);
