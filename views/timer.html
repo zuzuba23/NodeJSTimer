@@ -1,0 +1,105 @@
+<html>
+	<head>
+		<title id="title">
+			Timer
+		</title>
+		<script type="text/javascript" src="/js/jquery.min.js"></script>
+	</head>
+	<body>
+		<select id="select">
+		
+		</select>
+		<div id="message" style="font-size:350%;" align="center">
+		
+		</div>
+		<div id="alarm-controls" hidden>
+			<audio loop id="alarmAudio">
+				<source src="/audio/alarm.mp3" type="audio/mp3" />
+			</audio>
+			<button id="stopAlarmBtn">
+				Stop
+			</button>
+		</div>
+	</body>
+	
+	<script>
+		$('document').ready(function(){
+			var x;
+			var currentSecs;
+			init();
+			$('#select').change(function(){
+				StartTimer($('#select').val());
+			});
+			
+			$('#stopAlarmBtn').click(function(){
+				StopAlarm();
+			});
+			
+			function StartTimer(value){
+				clearInterval(x);
+				currentSecs = 0;
+				StopAlarm();//just in case
+				var totalSecs = value;
+				x = setInterval(function() {
+					currentSecs ++;
+					var text = convertSecsToString(totalSecs - currentSecs);
+					$('#message').html(text);
+					$('#title').html('Timer -- ' + text);
+					if (currentSecs == totalSecs) {
+						clearInterval(x);
+						StartAlarm();
+						$('#message').html('Expired');
+					}
+				}, 1000);
+			}
+			
+			function StartAlarm(){
+				$('#alarmAudio')[0].play();
+				$('#title').html('Timer -- EXPIRED');
+				$('#alarm-controls').show();
+				$('#select').prop('selectedIndex',0);
+			}
+			
+			function StopAlarm(){
+				$('#alarmAudio')[0].pause();
+				$('#alarmAudio')[0].currentTime = 0;
+				$('#title').html('Timer');
+				$('#alarm-controls').hide();
+			}
+			
+			function init(){
+				var html = '<option disabled selected value> -- select an option -- </option>';
+				html += '<option value="5">5 seconds(test)</option>';
+				for(var i=1;i<=120;i++){
+					if(i/60 >= 1){
+						html += '<option value="' + (i*60) + '">' + i + ' minutes(' + (Math.floor(i/60)) + 'h:' + (i%60) + 'm)</option>';
+					} else 
+						html += '<option value="' + (i*60) + '">' + i + ' minutes</option>';
+				}
+				$('#select').html(html);
+			}
+			
+			function convertSecsToString(secs){
+				var hours = Math.floor(secs / 3600);
+				secs = secs - (hours * 3600);
+				var mins = Math.floor(secs / 60);
+				secs = secs - (mins * 60);
+				var time = '';
+				if(hours / 10 < 1)
+					time += '0' + hours + ':';
+				else
+					time += hours + ':';
+					
+				if(mins / 10 < 1)
+					time += '0' + mins + ':';
+				else
+					time += mins + ':';
+				if(secs / 10 < 1)
+					time += '0' + secs;
+				else
+					time += secs;
+				return time;
+			}
+		});
+	</script>
+</html>
