@@ -8,7 +8,7 @@
 	<body>
 		<select id="select">
 		
-		</select>
+		</select><button id="tenMinsBtn">10 min<button>
 		<div id="message" style="font-size:350%;" align="center">
 		
 		</div>
@@ -33,6 +33,10 @@
 			
 			$('#stopAlarmBtn').click(function(){
 				StopAlarm();
+			});
+			
+			$('#tenMinsBtn').click(function(){
+				Startimer(600);	
 			});
 			
 			function StartTimer(value){
