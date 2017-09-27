@@ -4,6 +4,8 @@ var http = require('http').Server(app);
 var path = require('path');
 
 app.use('/js', express.static(__dirname + '/public/js'));
+app.use('/font', express.static(__dirname + '/public/font'));
+app.use('/css', express.static(__dirname + '/public/css'));
 app.use('/audio', express.static(__dirname + '/public/audio'));
 
 app.get('/', function(req,res){

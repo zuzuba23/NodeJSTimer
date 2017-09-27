@@ -3,26 +3,40 @@
 		<title id="title">
 			Timer
 		</title>
+		<link href='/css/css.css' rel='stylesheet'>
 		<script type="text/javascript" src="/js/jquery.min.js"></script>
 	</head>
 	<body>
-		<select id="select">
+		<div style="float:left; width:15%;">
+			<select id="select">
 		
-		</select>
-		<div id="message" style="font-size:350%;" align="center">
-		
-		</div>
-		<div id="alarm-controls" hidden>
-			<audio loop id="alarmAudio">
-				<source src="/audio/alarm.mp3" type="audio/mp3" />
-			</audio>
-			<button id="stopAlarmBtn">
-				Stop
+			</select>
+			<button id="tenMinsBtn">
+				10 min
 			</button>
+			<br>
+			<input type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)" onchange="SetVolume(this.value)"></input>
+		</div>
+		<div align="center" style="display:inline-block; width:50%;">
+			<div id="message">
+				
+			</div>
+			<div id="alarm-controls" hidden style="text-align: center;">
+				<audio loop id="alarmAudio">
+					<source src="/audio/alarm.mp3" type="audio/mp3" />
+				</audio>
+				<button id="stopAlarmBtn" style="">
+					Stop
+				</button>
+			</div>
 		</div>
 	</body>
 	
 	<script>
+		function SetVolume(val){
+			$('#alarmAudio').prop('volume', val / 100);
+		}
+		
 		$('document').ready(function(){
 			var x;
 			var currentSecs;
@@ -33,6 +47,10 @@
 			
 			$('#stopAlarmBtn').click(function(){
 				StopAlarm();
+			});
+			
+			$('#tenMinsBtn').click(function(){
+				StartTimer(600);	
 			});
 			
 			function StartTimer(value){

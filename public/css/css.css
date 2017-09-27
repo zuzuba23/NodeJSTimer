@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Faster One';
+    src: url(/font/FasterOne-Regular.ttf);
+}
+
+#message{
+	font-size: 350%;
+}
+#stopAlarmBtn{
+	height: 5%;
+	width: 20%;
+	border-radius: 100%;
+	border: none;
+	color: red;
+	font-family: 'Faster One';
+	font-size: 22px;
+}
+div{
+	//border: solid;
+}
