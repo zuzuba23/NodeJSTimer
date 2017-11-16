@@ -14,6 +14,9 @@
 			<button id="tenMinsBtn">
 				10 min
 			</button>
+			<button id="fortyMinsBtn">
+				40 min
+			</button>
 			<br>
 			<input type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)" onchange="SetVolume(this.value)"></input>
 		</div>
@@ -52,6 +55,10 @@
 			$('#tenMinsBtn').click(function(){
 				StartTimer(600);	
 			});
+			
+			$('#fortyMinsBtn').click(function(){
+				StartTimer(2400);
+			})
 			
 			function StartTimer(value){
 				clearInterval(x);
